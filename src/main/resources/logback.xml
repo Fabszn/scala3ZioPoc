@@ -1,0 +1,36 @@
+<configuration scan="true" scanPeriod="30 seconds">
+  <jmxConfigurator />
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <omitEmptyFields>true</omitEmptyFields>
+                    <pattern>
+                        {
+                        "date-time": "%date{yyyy-MM-dd'T'HH:mm:ss'Z'}",
+                        "message": "%message",
+                        "logger-name": "%logger",
+                        "thread-name": "%thread",
+                        "log-level": "%level",
+                        "stack-trace": "%exception"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+    <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%level %d{HH:mm:ss.SSS} [%thread] %logger{15} - %message%n%xException{10}</pattern>
+        </encoder>
+    </appender>-->
+
+
+  <!-- Strictly speaking, the level attribute is not necessary since -->
+  <!-- the level of the root level is set to DEBUG by default.       -->
+  <root level="info">
+    <appender-ref ref="STDOUT" />
+  </root>
+ 
+</configuration>
